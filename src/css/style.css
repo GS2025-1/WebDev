@@ -1,4 +1,3 @@
-/* Reset CSS Básico */
 * {
     margin: 0;
     padding: 0;
@@ -6,17 +5,14 @@
 }
 
 :root {
-    /* Paleta de Cores */
-    --primary-color: #007bff; /* Azul vibrante */
-    --secondary-color: #6c757d; /* Cinza médio */
-    --text-color: #343a40; /* Preto quase escuro */
-    --background-color: #f8f9fa; /* Branco suave */
-    --light-bg: #e9ecef; /* Cinza muito claro */
-    --accent-green: #28a745; /* Verde para OK */
-    --accent-yellow: #ffc107; /* Amarelo para Atenção */
-    --accent-red: #dc3545; /* Vermelho para Crítico */
-
-    /* Fontes */
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --text-color: #343a40;
+    --background-color: #f8f9fa;
+    --light-bg: #e9ecef;
+    --accent-green: #28a745;
+    --accent-yellow: #ffc107;
+    --accent-red: #dc3545;
     --font-family-primary: 'Roboto', sans-serif;
 }
 
@@ -25,10 +21,9 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    overflow-x: hidden; /* Evita scroll horizontal indesejado */
+    overflow-x: hidden;
 }
 
-/* Header e Navegação */
 header {
     background-color: var(--primary-color);
     color: white;
@@ -69,7 +64,7 @@ header {
     font-weight: 400;
     padding: 5px 0;
     transition: color 0.3s ease, border-bottom 0.3s ease;
-    border-bottom: 2px solid transparent; /* Para o hover */
+    border-bottom: 2px solid transparent;
 }
 
 .nav-links a:hover {
@@ -77,14 +72,11 @@ header {
     border-bottom-color: var(--light-bg);
 }
 
-/* Indicador de seção ativa */
 .nav-links a.active {
     font-weight: 700;
     border-bottom-color: white;
 }
 
-
-/* Seções de Conteúdo */
 main {
     max-width: 1200px;
     margin: 30px auto;
@@ -174,7 +166,7 @@ main {
 .section-text p {
     font-size: 1.1rem;
     margin-bottom: 15px;
-    max-width: 600px; /* Para concisão de parágrafos */
+    max-width: 600px;
 }
 
 .section-image {
@@ -184,12 +176,10 @@ main {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Para alternar a ordem de texto e imagem */
 .content-section.reverse-order {
     flex-direction: row-reverse;
 }
 
-/* Rodapé */
 footer {
     text-align: center;
     padding: 30px;
@@ -199,7 +189,6 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsividade */
 @media (max-width: 900px) {
     .navbar {
         flex-direction: column;
@@ -242,7 +231,7 @@ footer {
     }
 
     .content-section.reverse-order {
-        flex-direction: column; /* Volta para coluna em telas menores */
+        flex-direction: column;
     }
 }
 
