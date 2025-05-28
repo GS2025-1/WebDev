@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Global Solution FIAP</title>
+    <link rel="stylesheet" href="/src/css/contato-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">💧 Monitor</div>
+            <button class="close-btn" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#problema" data-section="problema">O Problema</a></li>
+                <li><a href="#tecnologias" data-section="tecnologias">Tecnologias</a></li>
+                <li><a href="#objetivos" data-section="objetivos">Objetivos</a></li>
+                <li><a href="#publico-alvo" data-section="publico-alvo">Público-Alvo</a></li>
+                <li><a href="#beneficios" data-section="beneficios">Benefícios</a></li>
+                <li><a href="#dia-a-dia" data-section="dia-a-dia">Dia a Dia</a></li>
+                <li><a href="#Quiz" data-section="quiz">Quiz</a></li>
+                <li><a href="contact.html" class="active" data-section="contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="overlay"></div>
+
+    <header class="main-header">
+        <button class="hamburger-btn" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1>Contato</h1> </header>
+
+    <div class="main-content">
+        <div class="contact-page-container">
+            <div class="contact-left-side">
+                <h1>Vamos conversar. Conte-nos sobre seu problema ou ideia</h1>
+                <p>Vamos resolver juntos!<span class="wave-emoji">👋</span></p>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:senseflood@gmail.com ">senseflood@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="contact-right-side">
+                <div class="contact-form-card">
+                    <h2>Nós envie uma mensagem 🚀</h2>
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label for="fullName">Nome Completo*</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Coloque o seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailAddress">E-mail*</label>
+                            <input type="email" id="emailAddress" name="emailAddress" placeholder="Coloque o seu email " required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <input type="text" id="subject" name="subject" placeholder="Coloque o seu assunto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="problemDetails">Conte-nos o seu problema*</label>
+                            <textarea id="problemDetails" name="problemDetails" rows="5" placeholder="Descreva o seu problema aqui..." required></textarea>
+                        </div>
+                        <button type="submit" class="send-message-btn">Enviar mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="graphic-circle"></div>
+        <div class="graphic-person-icon"></div>
+
+        <footer>
+            <p>&copy;2025 - Projeto Global Solution FIAP</p>
+        </footer>
+    </div> <script src="src/js/script.js"></script>
+</body>
+</html>

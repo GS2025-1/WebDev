@@ -1,0 +1,438 @@
+/* Reset CSS Basico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Paleta de Cores da HOMEPAGE (Azul) - Aplicada a TODO o site */
+    --primary-color: #007bff; /* Azul principal */
+    --secondary-color: #6c757d; /* Cinza médio */
+    --text-color: #343a40; /* Preto quase escuro */
+    --background-color: #f8f9fa; /* Branco suave para o fundo geral */
+    --light-bg: #e9ecef; /* Cinza muito claro */
+    --accent-green: #28a745; /* Verde para OK */
+    --accent-yellow: #ffc107; /* Amarelo para Atenção */
+    --accent-red: #dc3545; /* Vermelho para Crítico */
+    --sidebar-width: 250px;
+
+    /* Cores adicionais para a página de contato, se necessário, adaptadas para a paleta azul */
+    --contact-bg-color: #e0f2f7; /* Um azul claro para o fundo da página de contato */
+    --contact-text-color: #1a237e; /* Azul mais escuro para textos específicos da contato */
+    --contact-form-border: #90caf9; /* Azul claro para bordas do formulário */
+    --contact-button-bg: var(--primary-color); /* Botão de envio usando o primary-color */
+    --wave-emoji-yellow: #FFD700; /* Amarelo do emoji (pode manter) */
+
+
+    --font-family-primary: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    color: var(--text-color); /* Cor de texto geral */
+    background-color: var(--background-color); /* Fundo geral */
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px; /* Para compensar o header fixo */
+}
+
+/* Header principal (navbar superior para todas as páginas) */
+.main-header {
+    background-color: var(--primary-color); /* Usando primary-color */
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 1rem 20px;
+}
+
+.navbar { /* Esta classe é da sidebar agora, não mais da navbar superior */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Isso parece ser um resquício da navbar top. Ajustar se precisar. */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 5px 0;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover {
+    color: rgba(255, 255, 255, 0.7);
+    border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-links a.active {
+    font-weight: 700;
+    border-bottom-color: white;
+}
+
+/* Sidebar (Navbar lateral) */
+.sidebar {
+    height: 100%;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: var(--primary-color); /* Usando primary-color */
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
+
+.sidebar-header .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--light-bg);
+}
+
+.main-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.hamburger-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.hamburger-btn:hover {
+    color: var(--light-bg);
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.contact-page-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+    background-color: var(--contact-bg-color); /* Usando a cor de fundo da página de contato */
+    border-radius: 10px; /* Adicionado para casar com a imagem, se houver */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* Sombra para o container principal da página de contato */
+    margin-top: 20px; /* Espaço abaixo do header fixo */
+}
+
+.contact-left-side {
+    flex: 1;
+    max-width: 500px;
+    text-align: left;
+    padding: 20px;
+}
+
+.contact-left-side h1 {
+    font-size: 3rem;
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.contact-left-side p {
+    font-size: 1.5rem;
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+    margin-bottom: 30px;
+}
+
+.wave-emoji {
+    font-size: 1.8rem;
+    color: var(--wave-emoji-yellow);
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+    font-size: 1.2rem;
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+}
+
+.contact-info i {
+    font-size: 1.5rem;
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+}
+
+.contact-info a {
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--primary-color); /* Usando o azul principal no hover */
+}
+
+.contact-right-side {
+    flex: 1;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.contact-form-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    border: 1px solid var(--contact-form-border); /* Usando a borda do formulário */
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-card h2 {
+    font-size: 2rem;
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--contact-text-color); /* Usando a cor de texto da página de contato */
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--contact-form-border); /* Usando a borda do formulário */
+    border-radius: 8px;
+    font-family: var(--font-family-primary);
+    font-size: 1rem;
+    color: var(--text-color); /* Texto do input mais genérico */
+    background-color: var(--light-bg); /* Fundo levemente colorido nos inputs */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color); /* Usando o azul principal no foco */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); /* Sombra azul suave ao focar */
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.send-message-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: var(--contact-button-bg); /* Usando a cor do botão de contato */
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.send-message-btn:hover {
+    background-color: #0056b3; /* Tom mais escuro do azul principal no hover */
+    transform: translateY(-2px);
+}
+
+.send-message-btn:active {
+    transform: translateY(0);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.graphic-circle {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background-color: var(--primary-color); /* Usando o azul principal */
+    border-radius: 50%;
+    opacity: 0.2; /* Menor opacidade para ficar mais sutil */
+    z-index: 0;
+}
+
+.graphic-person-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary-color); /* Usando o azul principal */
+    border-radius: 50%;
+    opacity: 0.1; /* Menor opacidade para ficar mais sutil */
+    z-index: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--primary-color); /* Usando o azul principal */
+    color: var(--white);
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+    .main-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .contact-page-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .contact-left-side,
+    .contact-right-side {
+        max-width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .contact-left-side h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-left-side p {
+        font-size: 1.2rem;
+    }
+
+    .contact-info {
+        justify-content: center;
+    }
+
+    .contact-form-card {
+        padding: 30px 20px;
+    }
+
+    .contact-form-card h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-group label,
+    .form-group input,
+    .form-group textarea,
+    .send-message-btn {
+        font-size: 0.9rem;
+    }
+
+    .graphic-circle {
+        width: 150px;
+        height: 150px;
+        top: -30px;
+        right: -30px;
+    }
+
+    .graphic-person-icon {
+        width: 100px;
+        height: 100px;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .contact-left-side h1 {
+        font-size: 1.8rem;
+    }
+
+    .contact-left-side p {
+        font-size: 1rem;
+    }
+
+    .contact-info {
+        font-size: 1rem;
+    }
+    .contact-info i {
+        font-size: 1.2rem;
+    }
+
+    .contact-form-card {
+        padding: 20px 15px;
+    }
+    .contact-form-card h2 {
+        font-size: 1.5rem;
+    }
+}
