@@ -1,4 +1,3 @@
-/* Reset CSS Basico */
 * {
     margin: 0;
     padding: 0;
@@ -53,16 +52,14 @@ body {
     padding: 1rem 20px;
 }
 
-/* Ajustes para o logo no header principal quando a sidebar NÃO está aberta */
-.main-header .logo { /* Se você quiser um logo no header principal também */
+.main-header .logo { 
     font-size: 1.8rem;
     font-weight: 700;
     color: white;
-    margin-left: auto; /* Centraliza ou alinha o logo, ajuste conforme desejar */
+    margin-left: auto;
     margin-right: auto;
 }
 
-/* Botão do Hambúrguer */
 .hamburger-btn {
     background: none;
     border: none;
@@ -76,7 +73,6 @@ body {
     color: var(--light-bg);
 }
 
-/* Sidebar (Navbar lateral) */
 .sidebar {
     height: 100%;
     width: var(--sidebar-width);
@@ -105,7 +101,7 @@ body {
     margin-bottom: 20px;
 }
 
-.sidebar-header .logo { /* Logo dentro da sidebar */
+.sidebar-header .logo { 
     font-size: 1.6rem;
     font-weight: 700;
     color: white;
@@ -124,38 +120,37 @@ body {
     color: var(--light-bg);
 }
 
-/* Ajustes para a navegação dentro da sidebar */
-.navbar { /* Esta classe é da sidebar agora, não mais da navbar superior antiga */
-    flex-grow: 1; /* Permite que a nav ocupe o espaço restante na sidebar */
-    padding: 0; /* Remove padding que pode causar desalinhamento */
-    margin: 0; /* Remove margens que podem causar desalinhamento */
-    max-width: none; /* Remove limitação de largura que pode esconder links */
-    justify-content: flex-start; /* Alinha os itens ao início, verticalmente */
-    flex-direction: column; /* Garante que os links se empilhem verticalmente */
-    align-items: flex-start; /* Alinha os itens da nav à esquerda */
+.navbar { 
+    flex-grow: 1; 
+    padding: 0; 
+    margin: 0; 
+    max-width: none; 
+    justify-content: flex-start;
+    flex-direction: column; 
+    align-items: flex-start; 
 }
 
 .nav-links {
     list-style: none;
     padding: 0;
-    width: 100%; /* Garante que a lista de links ocupe a largura da sidebar */
-    display: flex; /* Mantém flex, mas com a direção da coluna */
-    flex-direction: column; /* Links em coluna */
+    width: 100%; 
+    display: flex;
+    flex-direction: column; 
 }
 
 .nav-links li {
-    margin-bottom: 0; /* Remove margem inferior padrão */
-    width: 100%; /* Ocupa a largura total para o padding do link */
+    margin-bottom: 0; 
+    width: 100%; 
 }
 
 .nav-links a {
-    display: block; /* Para ocupar todo o espaço clicável */
+    display: block; 
     color: white;
     text-decoration: none;
     font-weight: 400;
-    padding: 12px 20px; /* Padding interno para os links da sidebar */
+    padding: 12px 20px; 
     transition: background-color 0.3s ease, color 0.3s ease;
-    border-bottom: none; /* Remove a borda inferior que era da navbar horizontal */
+    border-bottom: none; 
 }
 
 .nav-links a:hover {
@@ -163,13 +158,11 @@ body {
     color: var(--light-bg);
 }
 
-/* Indicador de seção ativa na sidebar */
 .nav-links a.active {
     background-color: rgba(255, 255, 255, 0.2);
     font-weight: 700;
 }
 
-/* Overlay para quando a sidebar está aberta */
 .overlay {
     position: fixed;
     top: 0;
