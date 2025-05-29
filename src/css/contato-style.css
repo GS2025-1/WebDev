@@ -1,0 +1,465 @@
+/* Reset CSS Basico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --text-color: #343a40;
+    --background-color: #f8f9fa;
+    --light-bg: #e9ecef;
+    --accent-green: #28a745;
+    --accent-yellow: #ffc107;
+    --accent-red: #dc3545;
+    --sidebar-width: 250px;
+
+    --contact-bg-color: #e0f2f7;
+    --contact-text-color: #1a237e;
+    --contact-form-border: #90caf9;
+    --contact-button-bg: var(--primary-color);
+    --wave-emoji-yellow: #FFD700;
+
+    --font-family-primary: 'Roboto', sans-serif;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+}
+
+.main-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 1rem 20px;
+}
+
+/* Ajustes para o logo no header principal quando a sidebar NÃO está aberta */
+.main-header .logo { /* Se você quiser um logo no header principal também */
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin-left: auto; /* Centraliza ou alinha o logo, ajuste conforme desejar */
+    margin-right: auto;
+}
+
+/* Botão do Hambúrguer */
+.hamburger-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.hamburger-btn:hover {
+    color: var(--light-bg);
+}
+
+/* Sidebar (Navbar lateral) */
+.sidebar {
+    height: 100%;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    left: -250px;
+    background-color: var(--primary-color);
+    padding-top: 20px;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
+
+.sidebar-header .logo { /* Logo dentro da sidebar */
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--light-bg);
+}
+
+/* Ajustes para a navegação dentro da sidebar */
+.navbar { /* Esta classe é da sidebar agora, não mais da navbar superior antiga */
+    flex-grow: 1; /* Permite que a nav ocupe o espaço restante na sidebar */
+    padding: 0; /* Remove padding que pode causar desalinhamento */
+    margin: 0; /* Remove margens que podem causar desalinhamento */
+    max-width: none; /* Remove limitação de largura que pode esconder links */
+    justify-content: flex-start; /* Alinha os itens ao início, verticalmente */
+    flex-direction: column; /* Garante que os links se empilhem verticalmente */
+    align-items: flex-start; /* Alinha os itens da nav à esquerda */
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    width: 100%; /* Garante que a lista de links ocupe a largura da sidebar */
+    display: flex; /* Mantém flex, mas com a direção da coluna */
+    flex-direction: column; /* Links em coluna */
+}
+
+.nav-links li {
+    margin-bottom: 0; /* Remove margem inferior padrão */
+    width: 100%; /* Ocupa a largura total para o padding do link */
+}
+
+.nav-links a {
+    display: block; /* Para ocupar todo o espaço clicável */
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    padding: 12px 20px; /* Padding interno para os links da sidebar */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: none; /* Remove a borda inferior que era da navbar horizontal */
+}
+
+.nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--light-bg);
+}
+
+/* Indicador de seção ativa na sidebar */
+.nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 700;
+}
+
+/* Overlay para quando a sidebar está aberta */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.main-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.contact-page-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+    background-color: var(--contact-bg-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+.contact-left-side {
+    flex: 1;
+    max-width: 500px;
+    text-align: left;
+    padding: 20px;
+}
+
+.contact-left-side h1 {
+    font-size: 3rem;
+    color: var(--contact-text-color);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.contact-left-side p {
+    font-size: 1.5rem;
+    color: var(--contact-text-color);
+    margin-bottom: 30px;
+}
+
+.wave-emoji {
+    font-size: 1.8rem;
+    color: var(--wave-emoji-yellow);
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+    font-size: 1.2rem;
+    color: var(--contact-text-color);
+}
+
+.contact-info i {
+    font-size: 1.5rem;
+    color: var(--contact-text-color);
+}
+
+.contact-info a {
+    color: var(--contact-text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+    color: var(--primary-color);
+}
+
+.contact-right-side {
+    flex: 1;
+    max-width: 500px;
+    padding: 20px;
+}
+
+.contact-form-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    border: 1px solid var(--contact-form-border);
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-card h2 {
+    font-size: 2rem;
+    color: var(--contact-text-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--contact-text-color);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--contact-form-border);
+    border-radius: 8px;
+    font-family: var(--font-family-primary);
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.send-message-btn {
+    display: block;
+    width: 100%;
+    padding: 15px 25px;
+    background-color: var(--contact-button-bg);
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.send-message-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.send-message-btn:active {
+    transform: translateY(0);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.graphic-circle {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.2;
+    z-index: 0;
+}
+
+.graphic-person-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+    .main-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .contact-page-container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .contact-left-side,
+    .contact-right-side {
+        max-width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .contact-left-side h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-left-side p {
+        font-size: 1.2rem;
+    }
+
+    .contact-info {
+        justify-content: center;
+    }
+
+    .contact-form-card {
+        padding: 30px 20px;
+    }
+
+    .contact-form-card h2 {
+        font-size: 1.8rem;
+    }
+
+    .form-group label,
+    .form-group input,
+    .form-group textarea,
+    .send-message-btn {
+        font-size: 0.9rem;
+    }
+
+    .graphic-circle {
+        width: 150px;
+        height: 150px;
+        top: -30px;
+        right: -30px;
+    }
+
+    .graphic-person-icon {
+        width: 100px;
+        height: 100px;
+        bottom: 10px;
+        right: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .contact-left-side h1 {
+        font-size: 1.8rem;
+    }
+
+    .contact-left-side p {
+        font-size: 1rem;
+    }
+
+    .contact-info {
+        font-size: 1rem;
+    }
+    .contact-info i {
+        font-size: 1.2rem;
+    }
+
+    .contact-form-card {
+        padding: 20px 15px;
+    }
+    .contact-form-card h2 {
+        font-size: 1.5rem;
+    }
+}
