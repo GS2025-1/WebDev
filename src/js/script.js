@@ -1,72 +1,91 @@
+let slideIndex = 1;
+let slideshowTimeoutId;
+
+function displaySlide(n) {
+    let slides = document.querySelectorAll(".slide");
+    let dots = document.querySelectorAll(".dot");
+
+    if (slides.length === 0) {
+        return;
+    }
+
+    if (n > slides.length) { slideIndex = 1; }
+    if (n < 1) { slideIndex = slides.length; }
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    if (dots.length > 0) {
+        for (let i = 0; i < dots.length; i++) {
+            if (dots[i]) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+        }
+        if (dots[slideIndex - 1]) {
+            dots[slideIndex - 1].className += " active";
+        }
+    }
+    
+    if (slides[slideIndex - 1]) {
+        slides[slideIndex - 1].style.display = "block";
+    }
+}
+
+function autoAdvanceSlides() {
+    slideIndex++;
+    displaySlide(slideIndex);
+    slideshowTimeoutId = setTimeout(autoAdvanceSlides, 5000); 
+}
+
+window.plusSlides = function(n) {
+    clearTimeout(slideshowTimeoutId);
+    displaySlide(slideIndex += n);
+    slideshowTimeoutId = setTimeout(autoAdvanceSlides, 5000);
+};
+
+window.currentSlide = function(n) {
+    clearTimeout(slideshowTimeoutId);
+    displaySlide(slideIndex = n);
+    slideshowTimeoutId = setTimeout(autoAdvanceSlides, 5000);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    displaySlide(slideIndex); 
+    slideshowTimeoutId = setTimeout(autoAdvanceSlides, 5000);
+    
     const sidebar = document.querySelector('.sidebar');
     const hamburgerBtn = document.querySelector('.hamburger-btn');
     const closeBtn = document.querySelector('.close-btn');
     const overlay = document.querySelector('.overlay');
     const navLinks = document.querySelectorAll('.nav-links a');
     const mainSections = document.querySelectorAll('.main-content section');
+    const themeBtn = document.querySelector('.theme-btn');
+    const lightModeIcon = themeBtn ? themeBtn.querySelector('[data-mode="light"]') : null;
+    const darkModeIcon = themeBtn ? themeBtn.querySelector('[data-mode="dark"]') : null;
+    const colorButtons = document.querySelectorAll('.color-btn');
 
     const openSidebar = () => {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
+        if (sidebar) sidebar.classList.add('active');
+        if (overlay) overlay.classList.add('active');
         document.body.classList.add('sidebar-open');
     };
 
     const closeSidebar = () => {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
+        if (sidebar) sidebar.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
         document.body.classList.remove('sidebar-open');
     };
 
-    hamburgerBtn.addEventListener('click', openSidebar);
-    closeBtn.addEventListener('click', closeSidebar);
-    overlay.addEventListener('click', closeSidebar);
-
-    const highlightActiveNavLink = () => {
-        let activeSectionId = '';
-        const mainHeader = document.querySelector('.main-header');
-        const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
-
-        const currentPath = window.location.pathname;
-        const currentFileName = currentPath.split('/').pop();
-
-        if (currentFileName === 'index.html' || currentPath === '/') {
-            mainSections.forEach(section => {
-                const sectionTop = section.offsetTop - headerHeight - 50;
-                const sectionBottom = sectionTop + section.offsetHeight;
-
-                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
-                    activeSectionId = section.getAttribute('id');
-                }
-            });
-            if (!activeSectionId && window.pageYOffset < (mainSections[0]?.offsetTop || 0) - headerHeight - 50) {
-                   activeSectionId = 'pagina-inicial';
-            }
-        } else if (currentFileName === 'contato.html') {
-            activeSectionId = 'contatos';
-        }
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            const linkDataSection = link.getAttribute('data-section');
-            const linkHref = link.getAttribute('href');
-            const linkFileName = linkHref.split('/').pop().split('#')[0];
-
-            if (linkDataSection && linkDataSection === activeSectionId) {
-                link.classList.add('active');
-            } else if (linkFileName === currentFileName && !linkHref.includes('#')) {
-                link.classList.add('active');
-            } else if (linkHref === '/index.html' && currentPath === '/') {
-                link.classList.add('active');
-            }
-        });
-    };
+    if (hamburgerBtn) hamburgerBtn.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
 
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             const targetHref = link.getAttribute('href');
-            const isHashLink = targetHref.includes('#');
-            const targetFileName = targetHref.split('/').pop().split('#')[0];
+            const isHashLink = targetHref && targetHref.includes('#');
+            const targetFileName = targetHref ? targetHref.split('/').pop().split('#')[0] : '';
             const currentFileName = window.location.pathname.split('/').pop();
 
             if (isHashLink && (targetFileName === '' || targetFileName === currentFileName || (currentFileName === '' && targetFileName === 'index.html'))) {
@@ -90,23 +109,63 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    window.addEventListener('scroll', highlightActiveNavLink);
-    highlightActiveNavLink();
+    const highlightActiveNavLink = () => {
+        let activeSectionId = '';
+        const mainHeader = document.querySelector('.main-header');
+        const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
+        const currentPath = window.location.pathname;
+        const currentFileName = currentPath.split('/').pop() || 'index.html'; 
 
-    const themeBtn = document.querySelector('.theme-btn');
-    const lightModeIcon = themeBtn.querySelector('[data-mode="light"]');
-    const darkModeIcon = themeBtn.querySelector('[data-mode="dark"]');
-    const colorButtons = document.querySelectorAll('.color-btn');
+        if (currentFileName === 'index.html') { 
+            if (mainSections.length > 0) { 
+                 mainSections.forEach(section => {
+                    const sectionTop = section.offsetTop - headerHeight - 50; 
+                    const sectionBottom = sectionTop + section.offsetHeight;
+
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
+                        activeSectionId = section.getAttribute('id');
+                    }
+                });
+                if (!activeSectionId && mainSections[0] && window.pageYOffset < (mainSections[0].offsetTop - headerHeight - 50)) {
+                     activeSectionId = navLinks[0]?.getAttribute('data-section') || 'hero'; 
+                }
+            }
+        } else if (currentFileName === 'contato.html') {
+            activeSectionId = 'contatos'; 
+        } else if (currentFileName === 'quiz.html') {
+            activeSectionId = 'quiz'; 
+        }
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            const linkDataSection = link.getAttribute('data-section');
+            const linkHref = link.getAttribute('href');
+            
+            if (linkDataSection && linkDataSection === activeSectionId && (currentFileName === 'index.html' || (linkHref && (linkHref.startsWith('#') || linkHref.includes('index.html#'))))) {
+                link.classList.add('active');
+            } 
+            else if (linkHref && linkHref.includes(currentFileName) && !linkHref.includes('#') && currentFileName !== 'index.html') {
+                 link.classList.add('active');
+            }
+            else if (link && link.dataset && linkHref && (linkHref === '/index.html' || link.dataset.section === 'problema' && linkHref.endsWith('index.html')) && (currentFileName === 'index.html' || currentPath === '/') && activeSectionId === (link.dataset.section || 'hero') ) {
+                 link.classList.add('active');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', highlightActiveNavLink);
+    highlightActiveNavLink(); 
+
 
     const applyTheme = (isDarkMode) => {
         if (isDarkMode) {
             document.body.classList.add('dark-theme');
-            darkModeIcon.classList.add('active');
-            lightModeIcon.classList.remove('active');
+            if (darkModeIcon) darkModeIcon.classList.add('active'); 
+            if (lightModeIcon) lightModeIcon.classList.remove('active');
         } else {
             document.body.classList.remove('dark-theme');
-            lightModeIcon.classList.add('active');
-            darkModeIcon.classList.remove('active');
+            if (lightModeIcon) lightModeIcon.classList.add('active');
+            if (darkModeIcon) darkModeIcon.classList.remove('active');
         }
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 
@@ -122,22 +181,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else {
-            document.body.style.backgroundColor = '';
+            document.body.style.backgroundColor = ''; 
             colorButtons.forEach(button => button.classList.remove('active'));
         }
     };
-
+    
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        applyTheme(true);
-    } else {
-        applyTheme(false);
-    }
+    applyTheme(savedTheme === 'dark');
 
-    themeBtn.addEventListener('click', () => {
-        const isCurrentlyDark = document.body.classList.contains('dark-theme');
-        applyTheme(!isCurrentlyDark);
-    });
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            const isCurrentlyDark = document.body.classList.contains('dark-theme');
+            applyTheme(!isCurrentlyDark);
+        });
+    }
 
     colorButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -147,14 +204,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetColor = isCurrentlyDark ? selectedDarkBg : selectedLightBg;
 
             document.body.style.backgroundColor = targetColor;
-
-            localStorage.setItem('selected-body-bg', selectedLightBg);
+            localStorage.setItem('selected-body-bg', selectedLightBg); 
 
             colorButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
         });
     });
- /*Verificação de campos obrigatórios*/
+
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('form-message');
 
@@ -173,14 +229,13 @@ document.addEventListener('DOMContentLoaded', () => {
             formMessage.classList.remove('show');
             formMessage.style.backgroundColor = '';
             formMessage.style.color = '';
-            formMessage.style.borderColor = '';
             formMessage.textContent = '';
             
             requiredInputs.forEach(input => {
-                if (!input.value.trim()) {
+                if (input && !input.value.trim()) { 
                     isValid = false;
                     input.classList.add('invalid-field');
-                } else {
+                } else if (input) {
                     input.classList.remove('invalid-field');
                 }
             });
@@ -196,9 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 5000);
                 return;
             }
-
-            const nomePessoa = fullNameInput.value.trim();
-            const assuntoMensagem = subjectInput.value.trim() || "sem assunto";
+            
+            const nomePessoa = fullNameInput ? fullNameInput.value.trim() : "Usuário";
+            const assuntoMensagem = subjectInput && subjectInput.value.trim() ? subjectInput.value.trim() : "sem assunto";
 
             formMessage.style.backgroundColor = '#d4edda';
             formMessage.style.color = '#155724';

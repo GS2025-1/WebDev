@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="src/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.4.0/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -58,7 +57,29 @@
                 <p>Sua segurança contra enchentes e alagamentos começa aqui. Monitore o nível da água em tempo real e receba alertas precisos.</p>
                 <a href="#problema" class="btn">Saiba Mais</a>
             </div>
-            <img src="src/assets/imgs/risco de enchente.jpeg" alt="Imagem ilustrativa de um ambiente urbano com água subindo, mostrando o risco de enchentes." class="hero-image">
+            <div class="slideshow-container">
+                <div class="slide fade">
+                    <img src="src/assets/imgs/risco de enchente.jpeg" style="width:100%" alt="Primeira imagem do slideshow mostrando o risco de enchente.">
+                </div>
+
+                <div class="slide fade">
+                    <img src="src/assets/imgs/alagamentos.avif" style="width:100%" alt="Segunda imagem do slideshow mostrando ruas alagadas.">
+                </div>
+
+                <div class="slide fade">
+                    <img src="src/assets/imgs/alagamentos3.jpg" style="width:100%" alt="Terceira imagem do slideshow mostrando ruas alagadas.">
+                </div>
+                <div class="slide fade">
+                    <img src="src/assets/imgs/alagamentos4.jpg" style="width:100%" alt="Quarta imagem do slideshow mostrando a cidade alagada.">
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+            </div>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
         </section>
 
         <section id="problema" class="content-section">
