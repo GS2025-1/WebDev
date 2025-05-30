@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Global Solution FIAP</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="stylesheet" href="/src/css/quiz-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">💧 Monitor</div>
+            <button class="close-btn" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="theme-btn">
+            <span class="material-icons-sharp" data-mode="light">light_mode</span>
+            <span class="material-icons-sharp" data-mode="dark">dark_mode</span>
+        </div>
+        <div class="color-palette">
+            <button class="color-btn" data-light-bg="#f0f8ff" data-dark-bg="#2b303a"></button>
+            <button class="color-btn" data-light-bg="#e6ffe6" data-dark-bg="#2a3a2a"></button>
+            <button class="color-btn" data-light-bg="#fffaf0" data-dark-bg="#3a3a2a"></button>
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="/index.html" data-section="problema">Página Inicial</a></li>
+                <li><a href="/index.html#tecnologias" data-section="tecnologias">Tecnologias</a></li>
+                <li><a href="/index.html#objetivos" data-section="objetivos">Objetivos</a></li>
+                <li><a href="/index.html#publico-alvo" data-section="publico-alvo">Público-Alvo</a></li>
+                <li><a href="/index.html#beneficios" data-section="beneficios">Benefícios</a></li>
+                <li><a href="/index.html#dia-a-dia" data-section="dia-a-dia">Dia a Dia</a></li>
+                <li><a href="/src/pages/contato.html" data-section="contact">Contatos</a></li>
+                <li><a href="/src/pages/quiz.html" class="active" data-section="quiz">Quiz</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="overlay"></div>
+
+    <header class="main-header">
+        <button class="hamburger-btn" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1>Quiz</h1>
+    </header>
+
+    <div class="main-content">
+        <div class="quiz-container">
+            <h1>Quiz sobre Monitoramento de Nível de Água</h1>
+            <div id="quiz">
+                <div class="question">
+                    <h2 id="question-text"></h2>
+                    <ul class="options" id="options-list">
+                        </ul>
+                </div>
+                <button id="next-button">Próxima Pergunta</button>
+            </div>
+            <div id="results" style="display: none;">
+                <h2>Resultado Final</h2>
+                <p id="score">Você acertou <span id="correct-answers"></span> de <span id="total-questions"></span> perguntas.</p>
+                <button id="restart-button">Refazer o Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy;2025 - Projeto Global Solution FIAP</p>
+    </footer>
+
+    <script src="/src/js/quiz.js"></script>
+    <script src="/src/js/script.js"></script>
+</body>
+</html>
