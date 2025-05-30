@@ -49,6 +49,56 @@ document.addEventListener('DOMContentLoaded', () => {
             question: "Como a análise dos dados históricos de nível de água pode ser útil?",
             options: ["Para ganhar dinheiro na bolsa de valores", "Para identificar padrões climáticos e tendências de longo prazo", "Para decorar paredes com gráficos", "Para escrever ficção científica"],
             answer: 1
+        },
+        {
+            question: "O que é uma 'enchente relâmpago'?",
+            options: ["Uma enchente que ocorre rapidamente após chuvas intensas", "Uma enchente causada por derretimento de neve", "Uma enchente que dura muitos dias", "Uma enchente que afeta apenas áreas rurais"],
+            answer: 0
+        },
+        {
+            question: "Qual o papel dos pluviômetros no monitoramento de nível de água?",
+            options: ["Medir a temperatura do ar", "Medir a quantidade de chuva acumulada", "Medir a velocidade do vento", "Medir a pressão atmosférica"],
+            answer: 1
+        },
+        {
+            question: "O que é um sistema de alerta precoce para inundações?",
+            options: ["Um sistema que impede a chuva", "Um sistema que emite avisos à população antes de uma enchente", "Um sistema que limpa a água do rio", "Um sistema que desvia o curso dos rios"],
+            answer: 1
+        },
+        {
+            question: "Por que a desmatamento de áreas ribeirinhas aumenta o risco de enchentes?",
+            options: ["Melhora a visibilidade do rio", "Remove a vegetação que absorve água e fixa o solo", "Aumenta a pesca", "Facilita a construção de casas"],
+            answer: 1
+        },
+        {
+            question: "O que é 'cota de inundação'?",
+            options: ["O valor do metro cúbico de água", "O nível de água a partir do qual uma área começa a ser inundada", "A profundidade máxima de um rio", "A altura de uma barragem"],
+            answer: 1
+        },
+        {
+            question: "Qual a importância de um bom sistema de drenagem urbana?",
+            options: ["Para embelezar a cidade", "Para escoar a água da chuva e evitar alagamentos", "Para armazenar água para consumo", "Para atrair pássaros para a cidade"],
+            answer: 1
+        },
+        {
+            question: "O que é 'seca hidrológica'?",
+            options: ["Falta de chuva em uma região", "Redução prolongada dos níveis de água em rios, lagos e aquíferos", "Alta umidade do ar", "Excesso de água no solo"],
+            answer: 1
+        },
+        {
+            question: "Como a poluição afeta a gestão dos recursos hídricos e o monitoramento?",
+            options: ["Facilita a medição de nível", "Compromete a qualidade da água e a saúde dos ecossistemas aquáticos", "Aumenta a transparência da água", "Não tem impacto algum"],
+            answer: 1
+        },
+        {
+            question: "Qual o benefício de se ter um mapa de áreas de risco de inundação?",
+            options: ["Para decorar a casa", "Para identificar locais seguros e planejar medidas preventivas", "Para saber onde não construir", "Para determinar o valor dos imóveis"],
+            answer: 1
+        },
+        {
+            question: "O que é um 'sensor de nível' em um contexto de monitoramento de água?",
+            options: ["Um dispositivo que detecta movimento", "Um dispositivo que mede a altura da superfície da água", "Um dispositivo que mede a qualidade da água", "Um dispositivo que mede a temperatura da água"],
+            answer: 1
         }
     ];
 
@@ -62,24 +112,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const correctAnswersElement = document.getElementById('correct-answers');
     const totalQuestionsElement = document.getElementById('total-questions');
 
+    const NUMBER_OF_QUESTIONS_TO_SHOW = 10; 
+
+    let selectedQuizQuestions = []; 
     let currentQuestionIndex = 0;
     let score = 0;
     let answered = false;
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function initQuiz() {
+        const allShuffledQuestions = shuffleArray([...quizData]);
+
+        selectedQuizQuestions = allShuffledQuestions.slice(0, NUMBER_OF_QUESTIONS_TO_SHOW);
+
+        currentQuestionIndex = 0;
+        score = 0;
+        answered = false;
+        resultsContainer.style.display = 'none';
+        quizContainer.style.display = 'block';
+        loadQuestion();
+    }
 
     function loadQuestion() {
         answered = false;
         nextButton.disabled = true;
         clearOptionFeedback();
 
-        const currentQuestion = quizData[currentQuestionIndex];
-        questionTextElement.textContent = `Pergunta ${currentQuestionIndex + 1} de ${quizData.length}: ${currentQuestion.question}`;
+        const currentQuestionOriginal = selectedQuizQuestions[currentQuestionIndex];
+        
+        const optionsWithIndexes = currentQuestionOriginal.options.map((option, originalIndex) => ({ option, originalIndex }));
+        const shuffledOptionsWithIndexes = shuffleArray(optionsWithIndexes);
+
+        questionTextElement.textContent = `Pergunta ${currentQuestionIndex + 1} de ${selectedQuizQuestions.length}: ${currentQuestionOriginal.question}`;
 
         optionsListElement.innerHTML = '';
-        currentQuestion.options.forEach((option, index) => {
+        shuffledOptionsWithIndexes.forEach((item, displayIndex) => {
             const li = document.createElement('li');
             const button = document.createElement('button');
-            button.textContent = option;
-            button.dataset.answer = index;
+            button.textContent = item.option;
+            button.dataset.originalIndex = item.originalIndex;
             button.addEventListener('click', selectAnswer);
             li.appendChild(button);
             optionsListElement.appendChild(li);
@@ -93,15 +171,15 @@ document.addEventListener('DOMContentLoaded', () => {
         answered = true;
         
         const selectedButton = event.target;
-        const selectedAnswerIndex = parseInt(selectedButton.dataset.answer);
-        const correctAnswerIndex = quizData[currentQuestionIndex].answer;
+        const selectedOriginalAnswerIndex = parseInt(selectedButton.dataset.originalIndex);
+        const correctAnswerOriginalIndex = selectedQuizQuestions[currentQuestionIndex].answer;
 
-        if (selectedAnswerIndex === correctAnswerIndex) {
+        if (selectedOriginalAnswerIndex === correctAnswerOriginalIndex) {
             score++;
             selectedButton.classList.add('correct');
         } else {
             selectedButton.classList.add('incorrect');
-            const correctButton = optionsListElement.querySelector(`button[data-answer="${correctAnswerIndex}"]`);
+            const correctButton = optionsListElement.querySelector(`button[data-original-index="${correctAnswerOriginalIndex}"]`);
             if (correctButton) {
                 correctButton.classList.add('correct');
             }
@@ -126,21 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
         quizContainer.style.display = 'none';
         resultsContainer.style.display = 'block';
         correctAnswersElement.textContent = score;
-        totalQuestionsElement.textContent = quizData.length; 
+        totalQuestionsElement.textContent = selectedQuizQuestions.length;
     }
 
     function resetQuiz() {
-        currentQuestionIndex = 0;
-        score = 0;
-        answered = false;
-        resultsContainer.style.display = 'none';
-        quizContainer.style.display = 'block';
-        loadQuestion();
+        initQuiz(); 
     }
 
     nextButton.addEventListener('click', () => {
         if (answered) {
-            if (currentQuestionIndex < quizData.length - 1) {
+            if (currentQuestionIndex < selectedQuizQuestions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion();
             } else {
@@ -151,5 +224,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     restartButton.addEventListener('click', resetQuiz);
 
-    loadQuestion();
+    initQuiz();
 });
