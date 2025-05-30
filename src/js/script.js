@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.close-btn');
     const overlay = document.querySelector('.overlay');
     const navLinks = document.querySelectorAll('.nav-links a');
-    const mainSections = document.querySelectorAll('main section');
+    const mainSections = document.querySelectorAll('.main-content section');
 
     const openSidebar = () => {
         sidebar.classList.add('active');
@@ -82,6 +82,66 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.addEventListener('scroll', highlightActiveNavLink);
-
     highlightActiveNavLink();
+
+    const themeBtn = document.querySelector('.theme-btn');
+    const lightModeIcon = themeBtn.querySelector('[data-mode="light"]');
+    const darkModeIcon = themeBtn.querySelector('[data-mode="dark"]');
+    const colorButtons = document.querySelectorAll('.color-btn');
+    const applyTheme = (isDarkMode) => {
+        if (isDarkMode) {
+            document.body.classList.add('dark-theme');
+            darkModeIcon.classList.add('active');
+            lightModeIcon.classList.remove('active');
+        } else {
+            document.body.classList.remove('dark-theme');
+            lightModeIcon.classList.add('active');
+            darkModeIcon.classList.remove('active');
+        }
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+        const savedBaseColor = localStorage.getItem('selected-body-bg');
+        if (savedBaseColor) {
+            colorButtons.forEach(button => {
+                if (button.dataset.lightBg === savedBaseColor) {
+                    const targetColor = isDarkMode ? button.dataset.darkBg : button.dataset.lightBg;
+                    document.body.style.backgroundColor = targetColor;
+                    button.classList.add('active'); 
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        } else {
+            document.body.style.backgroundColor = ''; 
+            colorButtons.forEach(button => button.classList.remove('active'));
+        }
+    };
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        applyTheme(true);
+    } else {
+        applyTheme(false);
+    }
+
+    themeBtn.addEventListener('click', () => {
+        const isCurrentlyDark = document.body.classList.contains('dark-theme');
+        applyTheme(!isCurrentlyDark);
+    });
+
+    colorButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const isCurrentlyDark = document.body.classList.contains('dark-theme');
+            const selectedLightBg = button.dataset.lightBg;
+            const selectedDarkBg = button.dataset.darkBg;
+            const targetColor = isCurrentlyDark ? selectedDarkBg : selectedLightBg;
+
+            document.body.style.backgroundColor = targetColor;
+
+            localStorage.setItem('selected-body-bg', selectedLightBg);
+
+            colorButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
 });
