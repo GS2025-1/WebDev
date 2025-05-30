@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
     <div class="sidebar">
@@ -16,6 +17,15 @@
             <button class="close-btn" aria-label="Fechar menu">
                 <i class="fas fa-times"></i>
             </button>
+        </div>
+        <div class="theme-btn">
+            <span class="material-icons-sharp" data-mode="light">light_mode</span>
+            <span class="material-icons-sharp" data-mode="dark">dark_mode</span>
+        </div>
+        <div class="color-palette">
+            <button class="color-btn" data-light-bg="#f0f8ff" data-dark-bg="#2b303a"></button>
+            <button class="color-btn" data-light-bg="#e6ffe6" data-dark-bg="#2a3a2a"></button>
+            <button class="color-btn" data-light-bg="#fffaf0" data-dark-bg="#3a3a2a"></button>
         </div>
         <nav class="navbar">
             <ul class="nav-links">
@@ -32,7 +42,10 @@
         <button class="hamburger-btn" aria-label="Abrir menu">
             <i class="fas fa-bars"></i>
         </button>
-        <h1>Contato</h1> </header>
+        <h1>Contato</h1>
+    </header>
+
+    <div id="form-message" class="form-message"></div>
 
     <div class="main-content">
         <div class="contact-page-container">
@@ -48,7 +61,7 @@
             <div class="contact-right-side">
                 <div class="contact-form-card">
                     <h2>Nós envie uma mensagem 🚀</h2>
-                    <form action="#" method="POST">
+                    <form id="contactForm" action="#" method="POST">
                         <div class="form-group">
                             <label for="fullName">Nome Completo*</label>
                             <input type="text" id="fullName" name="fullName" placeholder="Coloque o seu nome completo" required>
@@ -73,10 +86,11 @@
 
         <div class="graphic-circle"></div>
         <div class="graphic-person-icon"></div>
-
-        <footer>
-            <p>&copy;2025 - Projeto Global Solution FIAP</p>
-        </footer>
-    </div> <script src="/src/js/script.js"></script>
+    </div> 
+    
+    <footer>
+        <p>&copy;2025 - Projeto Global Solution FIAP</p>
+    </footer>
 </body>
+    <script src="/src/js/script.js"></script>
 </html>

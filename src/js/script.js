@@ -27,7 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const mainHeader = document.querySelector('.main-header');
         const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
 
-        if (window.location.pathname.endsWith('/index.html') || window.location.pathname.endsWith('/')) {
+        const currentPath = window.location.pathname;
+        const currentFileName = currentPath.split('/').pop();
+
+        if (currentFileName === 'index.html' || currentPath === '/') {
             mainSections.forEach(section => {
                 const sectionTop = section.offsetTop - headerHeight - 50;
                 const sectionBottom = sectionTop + section.offsetHeight;
@@ -36,7 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     activeSectionId = section.getAttribute('id');
                 }
             });
-        } else if (window.location.pathname.includes('/src/pages/contato.html')) {
+            if (!activeSectionId && window.pageYOffset < (mainSections[0]?.offsetTop || 0) - headerHeight - 50) {
+                   activeSectionId = 'pagina-inicial';
+            }
+        } else if (currentFileName === 'contato.html') {
             activeSectionId = 'contatos';
         }
 
@@ -44,10 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
             const linkDataSection = link.getAttribute('data-section');
             const linkHref = link.getAttribute('href');
+            const linkFileName = linkHref.split('/').pop().split('#')[0];
 
             if (linkDataSection && linkDataSection === activeSectionId) {
                 link.classList.add('active');
-            } else if (linkHref && window.location.pathname.includes(linkHref.split('/').pop().split('#')[0]) && !linkHref.includes('#')) {
+            } else if (linkFileName === currentFileName && !linkHref.includes('#')) {
+                link.classList.add('active');
+            } else if (linkHref === '/index.html' && currentPath === '/') {
                 link.classList.add('active');
             }
         });
@@ -56,12 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             const targetHref = link.getAttribute('href');
-            const isHashLink = targetHref.startsWith('#');
-            const isLinkToCurrentPage = targetHref.split('#')[0].endsWith(window.location.pathname.split('/').pop());
+            const isHashLink = targetHref.includes('#');
+            const targetFileName = targetHref.split('/').pop().split('#')[0];
+            const currentFileName = window.location.pathname.split('/').pop();
 
-            if (isHashLink && isLinkToCurrentPage) {
+            if (isHashLink && (targetFileName === '' || targetFileName === currentFileName || (currentFileName === '' && targetFileName === 'index.html'))) {
                 event.preventDefault();
-                const targetId = targetHref.substring(1);
+                const targetId = targetHref.split('#').pop();
                 const targetElement = document.getElementById(targetId);
 
                 if (targetElement) {
@@ -76,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             }
-
             closeSidebar();
         });
     });
@@ -88,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightModeIcon = themeBtn.querySelector('[data-mode="light"]');
     const darkModeIcon = themeBtn.querySelector('[data-mode="dark"]');
     const colorButtons = document.querySelectorAll('.color-btn');
+
     const applyTheme = (isDarkMode) => {
         if (isDarkMode) {
             document.body.classList.add('dark-theme');
@@ -106,13 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (button.dataset.lightBg === savedBaseColor) {
                     const targetColor = isDarkMode ? button.dataset.darkBg : button.dataset.lightBg;
                     document.body.style.backgroundColor = targetColor;
-                    button.classList.add('active'); 
+                    button.classList.add('active');
                 } else {
                     button.classList.remove('active');
                 }
             });
         } else {
-            document.body.style.backgroundColor = ''; 
+            document.body.style.backgroundColor = '';
             colorButtons.forEach(button => button.classList.remove('active'));
         }
     };
@@ -144,4 +154,63 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
         });
     });
+
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('form-message');
+
+    if (contactForm && formMessage) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fullNameInput = document.getElementById('fullName');
+            const emailAddressInput = document.getElementById('emailAddress');
+            const subjectInput = document.getElementById('subject');
+            const problemDetailsInput = document.getElementById('problemDetails');
+
+            let isValid = true;
+            const requiredInputs = [fullNameInput, emailAddressInput, problemDetailsInput];
+
+            formMessage.classList.remove('show');
+            formMessage.style.backgroundColor = '';
+            formMessage.style.color = '';
+            formMessage.style.borderColor = '';
+            formMessage.textContent = '';
+            
+            requiredInputs.forEach(input => {
+                if (!input.value.trim()) {
+                    isValid = false;
+                    input.classList.add('invalid-field');
+                } else {
+                    input.classList.remove('invalid-field');
+                }
+            });
+
+            if (!isValid) {
+                formMessage.style.backgroundColor = '#f8d7da';
+                formMessage.style.color = '#721c24';
+                formMessage.style.borderColor = '#f5c6cb';
+                formMessage.textContent = 'Por favor, preencha todos os campos obrigatórios destacados.';
+                formMessage.classList.add('show');
+                setTimeout(() => {
+                    formMessage.classList.remove('show');
+                }, 5000);
+                return;
+            }
+
+            const nomePessoa = fullNameInput.value.trim();
+            const assuntoMensagem = subjectInput.value.trim() || "sem assunto";
+
+            formMessage.style.backgroundColor = '#d4edda';
+            formMessage.style.color = '#155724';
+            formMessage.style.borderColor = '#c3e6cb';
+            formMessage.textContent = `Olá ${nomePessoa}, a sua mensagem "${assuntoMensagem}" foi enviada com sucesso, logo entraremos em contato!`;
+            formMessage.classList.add('show');
+
+            contactForm.reset();
+
+            setTimeout(() => {
+                formMessage.classList.remove('show');
+            }, 5000);
+        });
+    }
 });
