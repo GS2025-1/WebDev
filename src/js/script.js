@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.add('active');
         });
     });
-
+ /*Verificação de campos obrigatórios*/
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('form-message');
 
