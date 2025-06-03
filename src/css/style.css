@@ -30,8 +30,8 @@ body.dark-theme {
 
 html {
     height: 100%;
-    margin: 0; /* Adicionado */
-    padding: 0; /* Adicionado */
+    margin: 0; 
+    padding: 0;
 }
 
 body {
@@ -46,7 +46,7 @@ body {
     overflow-x: hidden;
     transition: background-color 0.3s ease, color 0.3s ease;
     padding-top: 70px;
-    margin: 0; /* Garante que o body não tenha margens externas */
+    margin: 0;
 }
 
 .sidebar {
@@ -108,29 +108,53 @@ body:not(.dark-theme) .nav-links a:hover {
 }
 
 .nav-links {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 200px;
+  background-color: #007bff;
 }
 
-.nav-links li {
-    margin-bottom: 10px;
+.nav-links > li {
+  position: relative;
 }
 
-.nav-links a {
-    display: block;
-    text-decoration: none;
-    font-weight: 400;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.nav-links > li > a {
+  display: block;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  background-color: #007bff;
 }
 
-.nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.show-sub-contents {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  background: #007bff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  transition: all 0.4s ease;
 }
 
-.nav-links a.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    font-weight: 700;
+.show-sub-contents li a {
+  display: block;
+  padding: 10px 15px;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.show-sub-contents li a:hover {
+  background: #278fff;
+  color: white;
+}
+
+.nav-links > li:hover .show-sub-contents {
+  max-height: 500px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .overlay {
@@ -335,8 +359,8 @@ footer {
     margin-top: 50px;
     font-size: 0.9rem;
     flex-shrink: 0;
-    width: 100%; /* Adicionado/Confirmado */
-    box-sizing: border-box; /* Adicionado */
+    width: 100%; 
+    box-sizing: border-box; 
 }
 
 body.dark-theme footer {
@@ -395,6 +419,10 @@ body.dark-theme .hamburger-btn {
 body.dark-theme .nav-links a:hover {
     color: #e0e0e0;
     background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .nav-links li a {
+    background-color: #4c6ef5;
 }
 
 .color-palette {

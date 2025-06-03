@@ -28,14 +28,17 @@
         </div>
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="/index.html" data-section="problema">Página Inicial</a></li>
-                <li><a href="#problema" data-section="problema">O Problema</a></li>
-                <li><a href="#tecnologias" data-section="tecnologias">Tecnologias</a></li>
-                <li><a href="#objetivos" data-section="objetivos">Objetivos</a></li>
-                <li><a href="#publico-alvo" data-section="publico-alvo">Público-Alvo</a></li>
-                <li><a href="#beneficios" data-section="beneficios">Benefícios</a></li>
-                <li><a href="#dia-a-dia" data-section="dia-a-dia">Dia a Dia</a></li>
-                <li><a href="/src/pages/quiz.html" data-section="quiz">Quiz</a></li>
+                <li><a href="/index.html" data-section="problema" class="btn">Página Inicial</a>
+                <ul class="show-sub-contents">
+                    <li><a href="#problema" data-section="problema">O Problema</a></li>
+                    <li><a href="#tecnologias" data-section="tecnologias">Tecnologias</a></li>
+                    <li><a href="#objetivos" data-section="objetivos">Objetivos</a></li>
+                    <li><a href="#publico-alvo" data-section="publico-alvo">Público-Alvo</a></li>
+                    <li><a href="#beneficios" data-section="beneficios">Benefícios</a></li>
+                    <li><a href="#dia-a-dia" data-section="dia-a-dia">Dia a Dia</a></li>
+                </ul>
+                </li>
+                <li><a href="/src/pages/quiz.html" data-section="quiz" class="btn">Quiz</a></li>
                 <li><a href="/src/pages/contato.html" class="btn">Contatos</a></li>
             </ul>
         </nav>
@@ -79,6 +82,7 @@
                 <span class="dot" onclick="currentSlide(1)"></span>
                 <span class="dot" onclick="currentSlide(2)"></span>
                 <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
             </div>
         </section>
 
@@ -87,7 +91,6 @@
                 <h2>O Problema que nossa solução irá resolver</h2>
                 <p>Enchentes e alagamentos causam enormes prejuízos e riscos à vida. A falta de monitoramento eficaz agrava a situação.</p>
                 <p>Pessoas e bens são constantemente expostos a perigos invisíveis. Nosso sistema oferece uma camada vital de proteção.</p>
-                <a href="#" class="btn" target="_blank">Saiba Mais</a>
             </div>
             <img src="src/assets/imgs/alagamentos.avif" alt="Imagem de uma rua alagada com carros submersos, simbolizando o problema das enchentes." class="section-image">
         </section>
@@ -97,7 +100,8 @@
                 <h2>As tecnologias que são utilizadas</h2>
                 <p>Utilizamos Arduino UNO para controle e processamento de dados. O Sensor Ultrassônico HC-SR04 mede o nível da água com precisão.</p>
                 <p>Alertas visuais são emitidos por LEDs (verde, amarelo, vermelho) e um buzzer. O Display LCD que mostra informações claras.</p>
-                <a href="https://wokwi.com/projects/432152361386563585" class="btn" target="_blank">Teste no Wokwi</a>
+                <a href="https://wokwi.com/projects/432152361386563585" class="btn" target="_blank">Teste Você Mesmo</a>
+                <a href="https://www.youtube.com/watch?v=5JOB0prDq1M" class="btn" target="_blank" style="margin-top: 5px;">Vídeo Do Protótipo</a>
             </div>
             <img src="src/assets/imgs/aparelhoCorreto.png" alt="Imagem mostrando componentes eletrônicos como um Arduino, sensor ultrassônico, LEDs e um display LCD, conectados entre si." class="section-image">
         </section>
@@ -107,7 +111,6 @@
                 <h2>Os objetivos que pretendemos alcançar</h2>
                 <p>Nosso objetivo é aumentar a segurança de residências e comunidades. Fornecemos visualização clara do estado da água em tempo real.</p>
                 <p>Com alertas precisos e automáticos, buscamos prevenir desastres. Capacitamos a população para tomarem decisões rápidas e seguras.</p>
-                <a href="#" class="btn" target="_blank">Saiba Mais</a>
             </div>
             <img src="src/assets/imgs/meta.png" alt="Gráfico ou ícone de meta atingida, simbolizando os objetivos de segurança e prevenção de desastres." class="section-image">
         </section>
@@ -117,7 +120,6 @@
                 <h2>O público-alvo que será impactado</h2>
                 <p>Famílias em áreas de risco de alagamento são nosso foco principal. Comunidades e moradores de edificios também se beneficiam.</p>
                 <p>Prefeituras e órgãos de defesa civil podem usar a solução. Ajuda a proteger propriedades e vidas em larga escala.</p>
-                <a href="#" class="btn" target="_blank">Saiba Mais</a>
             </div>
             <img src="src/assets/imgs/casasRisco.webp" alt="Imagem de diversas pessoas em diferentes ambientes (residências, comunidade), representando o público-alvo." class="section-image">
         </section>
@@ -127,7 +129,6 @@
                 <h2>Os benefícios oferecidos pela nossa solução</h2>
                 <p>Oferecemos prevenção de danos materiais e proteção de vidas. Acesso fácil a informações cruciais sobre o nível da água.</p>
                 <p>Proporcionamos tranquilidade e autonomia para agir rapidamente. Reduzimos riscos com monitoramento contínuo e alertas eficazes.</p>
-                <a href="#" class="btn" target="_blank">Saiba Mais</a>
             </div>
             <img src="src/assets/imgs/seguranca.png" alt="Ícones ou gráficos simbolizando segurança, economia e informações em tempo real, representando os benefícios." class="section-image">
         </section>
@@ -137,7 +138,6 @@
                 <h2>Como a solução ajudará no dia a dia dos usuários</h2>
                 <p>Monitoramento contínuo do nível de água, 24 horas por dia. Alertas visuais e sonoros claros em caso de perigo iminente.</p>
                 <p>Informações de chuva no display permitem preparação antecipada. Proporciona maior tranquilidade em épocas de grandes chuvas.</p>
-                <a href="#" class="btn" target="_blank">Saiba Mais</a>
             </div>
             <img src="src/assets/imgs/familia.avif" alt="Imagem de uma família tranquila em casa, com um pequeno dispositivo de monitoramento no canto, indicando o uso diário da solução." class="section-image">
         </section>
@@ -146,7 +146,6 @@
     <footer>
         <p>&copy;2025 FloodSense - Projeto Global Solution FIAP</p>
     </footer>
-
-    <script src="src/js/script.js"></script>
 </body>
+<script src="src/js/script.js"></script>
 </html>
